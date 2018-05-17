@@ -1,0 +1,181 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Лабораторная-работа-1 &#8212; Документация ABC_2210 1</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Алфавитный указатель" href="genindex.html" />
+    <link rel="search" title="Поиск" href="search.html" />
+    <link rel="next" title="Лабораторная-работа-2" href="ex2.html" />
+    <link rel="prev" title="Отчеты для ауд. 22-10 (весна 2018)" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="id1">
+<h1>Лабораторная-работа-1<a class="headerlink" href="#id1" title="Ссылка на этот заголовок">¶</a></h1>
+<div class="section" id="id2">
+<h2>Цель работы<a class="headerlink" href="#id2" title="Ссылка на этот заголовок">¶</a></h2>
+<ol class="arabic simple">
+<li>Приобретение навыков по управлению процессами.</li>
+<li>Изучение системного вызова fork().</li>
+<li>Приобретение навыков написания и трансляции системного ПО на языке C.</li>
+<li>Изучение утилиты make и ее использование для трансляции программ на языке C.</li>
+<li>Использование удаленных серверов для трансляции приложений.</li>
+</ol>
+</div>
+<div class="section" id="id3">
+<h2>Выполнение работы<a class="headerlink" href="#id3" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Запуск <strong>DOCKER-контейнера</strong> из образа ubuntu 14.04 в интерактивном режиме</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="hll">sudo docker run -it --rm --name lab4 ubuntu:14.04
+</span></pre></div>
+</div>
+<p>В контейнере создаем каталог work и переходим в него.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="hll">mkdir work
+</span><span class="hll"><span class="nb">cd</span> /work
+</span></pre></div>
+</div>
+<p>Для выполнения работы неоднобимо установить недостающие компаненты:</p>
+<p><strong>Компилятор gcc</strong></p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="hll">apt-get install gcc
+</span></pre></div>
+</div>
+<p><strong>Редактор nano</strong></p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="hll">apt-get install nano
+</span></pre></div>
+</div>
+<p><strong>Утилита make</strong></p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="hll">apt-get install make
+</span></pre></div>
+</div>
+<p><strong>SSH клиент</strong></p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="hll">apt-get install -y openshh-clients
+</span></pre></div>
+</div>
+<p>В лабораторной работе используются файлы, хранящиеся на сервере лаборатории. Скопирум данные файлы в контенейр выполнив команду:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="hll">scp -r -P <span class="m">6666</span> student@openit.guap.ru:/container/ABC-Linux/lab4/* work/
+</span></pre></div>
+</div>
+<p>Просмотреть исправленные файлы возможно, перейдя по <a class="reference external" href="https://github.com/Ishkinin/abc_Linux_labs/tree/master/lab4">ссылкe</a>.</p>
+<p>Запуск отранслированной программы</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="hll">./work/bin/lab4
+</span></pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/lab4.png"><img alt="результат выполнения программы" class="align-center" src="_images/lab4.png" style="width: 648.9px; height: 83.7px;" /></a>
+<p>Теперь сохраняем наш контейнер и заливаем и его на <a class="reference external" href="https://hub.docker.com/r/ravil/abc-linux-lab4/">dockerhub</a>.</p>
+<p>Команды:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="hll">docker commit lab4
+</span><span class="hll">docker push lab4 ravil/abc-linux-lab4
+</span></pre></div>
+</div>
+</div>
+<div class="section" id="id4">
+<h2>Выводы<a class="headerlink" href="#id4" title="Ссылка на этот заголовок">¶</a></h2>
+<ol class="arabic simple">
+<li>Приобрел навыки управления процессами.</li>
+<li>Благодаря технологии контейнеров имеется возможность запуска процессов визолированном окружении абсолютно под разными операционными системами.</li>
+<li>Приобрел навыки управления процессами и навыки написания и перевода системного программного обеспечения на языке C.</li>
+<li>Изучил утилиту make и ее использование для перевода программ.</li>
+<li>И обнаружил что не всегда getppid() возвращает номер породившего процесса.</li>
+</ol>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">ABC_2210</a></h1>
+
+
+
+
+
+
+
+
+<h3>Навигация</h3>
+<p class="caption"><span class="caption-text">Оглавление:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Лабораторная-работа-1</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">Цель работы</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">Выполнение работы</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">Выводы</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ex2.html">Лабораторная-работа-2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ex3.html">Лабораторная-работа-3</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="предыдущая глава">Отчеты для ауд. 22-10 (весна 2018)</a></li>
+      <li>Next: <a href="ex2.html" title="следующая глава">Лабораторная-работа-2</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Быстрый поиск</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Искать" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Ravil.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/ex1.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
